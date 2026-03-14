@@ -6,7 +6,7 @@ services:
     environment:
       - NODE_ENV=production
     volumes:
-      - noteflow_data:/app/notes.db
+      - noteflow_data:/app/data
     restart: unless-stopped
 
 volumes:
