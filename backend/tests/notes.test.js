@@ -10,6 +10,15 @@ describe('Notes API', () => {
     expect(res.body.status).toBe('OK');
   });
 
+  test('GET /metrics returns server stats', async () => {
+    const res = await request(app).get('/metrics');
+    expect(res.statusCode).toBe(200);
+    expect(res.body).toHaveProperty('server');
+    expect(res.body).toHaveProperty('memory');
+    expect(res.body).toHaveProperty('performance');
+    expect(res.body).toHaveProperty('requests');
+  });
+
   test('POST /api/notes creates a note', async () => {
     const res = await request(app)
       .post('/api/notes')
