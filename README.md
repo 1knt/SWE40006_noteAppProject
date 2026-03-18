@@ -281,7 +281,7 @@ docker compose up
 
 ### Tests failing locally
 ```bash
-cd frontend
+cd backend
 rm -rf node_modules
 npm install
 npm test
