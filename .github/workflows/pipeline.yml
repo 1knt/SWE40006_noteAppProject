@@ -60,10 +60,12 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Install Railway CLI
-        run: npm install -g @railway/cli
+        run: |
+          curl -fsSL https://railway.app/install.sh | sh
+          echo "$HOME/.railway/bin" >> $GITHUB_PATH
 
       - name: Deploy to Railway
-        run: railway up --detach --service ${{ secrets.RAILWAY_SERVICE_NAME }}
+        run: railway up --detach
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
           RAILWAY_PROJECT_ID: ${{ secrets.RAILWAY_PROJECT_ID }}
@@ -73,15 +75,15 @@ jobs:
 
       - name: Health check on live server
         run: |
-          curl --fail ${{secrets.RAILWAY_URL}}/health
+          curl --fail ${{ secrets.RAILWAY_URL }}/health
           echo "✅ Health check passed!"
 
       - name: Metrics check on live server
         run: |
-          curl --fail ${{secrets.RAILWAY_URL}}/metrics
+          curl --fail ${{ secrets.RAILWAY_URL }}/metrics
           echo "✅ Metrics endpoint verified!"
 
       - name: Confirm deployment
         run: |
           echo "✅ NoteFlow successfully deployed to Railway!"
-          echo "🌐 Live at ${{secrets.RAILWAY_URL}}"
+          echo "🌐 Live at ${{ secrets.RAILWAY_URL }}"
