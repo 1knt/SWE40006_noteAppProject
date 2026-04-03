@@ -122,7 +122,7 @@ function App() {
     fetchNotes();
   }
 
-  async function handleDelete(id) {
+  async function handleDelete() {
     await fetch(`${NOTES_API}/${id}`, { method: 'DELETE', credentials: 'include' });
     fetchNotes();
   }
