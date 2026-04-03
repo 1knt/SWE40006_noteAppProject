@@ -89,7 +89,7 @@ function App() {
   }
 
   async function handleLogout() {
-    await fetch(`${AUTH_API}/logout`, {
+    await fetch(`${AUTH_API}/login`, {
       method: 'POST',
       credentials: 'include',
     });
